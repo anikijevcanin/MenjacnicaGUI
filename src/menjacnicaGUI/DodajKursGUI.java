@@ -7,6 +7,7 @@ import java.awt.TextArea;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -47,7 +48,7 @@ public class DodajKursGUI extends JFrame {
 	private void createContents() {
 		setResizable(false);
 		setTitle("Dodaj kurs");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 364, 313);
 		contentPane = new JPanel();
 		contentPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -202,12 +203,13 @@ public class DodajKursGUI extends JFrame {
 	}
 	private void unesiKurs() {
 		try {
-			dodatiKurs = "Naziv: " + naziv.getText() + ", skraceni naziv: " + skraceni.getText() + ", prodajni kurs: " + prodajni.getText()
+			dodatiKurs = "Naziv dodatog kursa: " + naziv.getText() + ", skraćeni naziv: " + skraceni.getText() + ", prodajni kurs: " + prodajni.getText()
 					+ ", kupovni kurs: " + kupovni.getText() + " i srednji kurs: " + srednji.getText();
 			glavniProzor.prikaziNovi(dodatiKurs);
 			dispose();
 		} catch (Exception e) {
-			e.getMessage();
+			JOptionPane.showMessageDialog(contentPane, e.getMessage(),
+					"Greška", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
