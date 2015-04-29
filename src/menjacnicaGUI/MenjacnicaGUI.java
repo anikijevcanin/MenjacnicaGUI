@@ -34,12 +34,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowListener;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
-import com.sun.glass.events.WindowEvent;
+import java.awt.Color;
+import java.awt.Toolkit;
 
-public class MenjacnicaGUI extends JFrame {
+public class MenjacnicaGUI extends JFrame{
 
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
@@ -83,12 +84,12 @@ public class MenjacnicaGUI extends JFrame {
 	 */
 	public MenjacnicaGUI() {
 		addWindowListener(new WindowAdapter() {
+			@Override
 			public void windowClosing(WindowEvent e) {
-                izadjiIzAplikacije();
-            }
-
-		});
-
+				izadjiIzAplikacije();
+			}
+		}); 
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenjacnicaGUI.class.getResource("/Icons/Money-icon.png")));
 		setTitle("Menja\u010Dnica");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 578, 403);
@@ -105,6 +106,7 @@ public class MenjacnicaGUI extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
+			scrollPane.setBackground(Color.WHITE);
 			scrollPane.setViewportView(getTable());
 		}
 		return scrollPane;
@@ -123,7 +125,6 @@ public class MenjacnicaGUI extends JFrame {
 	private JScrollPane getScrollPane_1() {
 		if (scrollPane_1 == null) {
 			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setPreferredSize(new Dimension(250, 70));
 			scrollPane_1.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			scrollPane_1.setAutoscrolls(true);
 			scrollPane_1.setViewportView(getTextArea());
@@ -226,7 +227,7 @@ public class MenjacnicaGUI extends JFrame {
 					ucitajIzFajla();
 				}
 			});
-			mntmOpen.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/TreeOpen.gif")));
+			mntmOpen.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/Icons/Documents-icon (1).png")));
 			mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		}
 		return mntmOpen;
@@ -239,7 +240,7 @@ public class MenjacnicaGUI extends JFrame {
 					sacuvajUFajl();
 				}
 			});
-			mntmSave.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/FloppyDrive.gif")));
+			mntmSave.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/Icons/Actions-document-save-icon (1).png")));
 			mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		}
 		return mntmSave;
@@ -336,8 +337,8 @@ public class MenjacnicaGUI extends JFrame {
 	private JTextArea getTextArea() {
 		if (textArea == null) {
 			textArea = new JTextArea();
+			textArea.setAutoscrolls(false);
 			textArea.setLineWrap(true);
-			textArea.setPreferredSize(new Dimension(250, 300));
 			textArea.setWrapStyleWord(true);
 		}
 		return textArea;
@@ -411,5 +412,5 @@ public class MenjacnicaGUI extends JFrame {
 		prozorZamena.setLocationRelativeTo(contentPane);
 		prozorZamena.setVisible(true);
 	}
-	
+
 }
