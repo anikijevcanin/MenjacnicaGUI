@@ -166,6 +166,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("Dodaj kurs");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					prikaziDodajKursGUI();
+				}
+			});
 			btnNewButton.setPreferredSize(new Dimension(110, 20));
 			btnNewButton.setBounds(12, 25, 126, 25);
 		}
@@ -263,7 +268,7 @@ public class MenjacnicaGUI extends JFrame {
 		if (popupMenu == null) {
 			popupMenu = new JPopupMenu();
 			popupMenu.add(getMntmDodajKurs());
-			popupMenu.add(getMntmObriiKurs());
+			popupMenu.add(getMntmObrisiKurs());
 			popupMenu.add(getMntmIzvriIzmenu());
 		}
 		return popupMenu;
@@ -291,7 +296,7 @@ public class MenjacnicaGUI extends JFrame {
 		}
 		return mntmDodajKurs;
 	}
-	private JMenuItem getMntmObriiKurs() {
+	private JMenuItem getMntmObrisiKurs() {
 		if (mntmObriiKurs == null) {
 			mntmObriiKurs = new JMenuItem("Obri\u0161i kurs");
 		}
@@ -312,6 +317,10 @@ public class MenjacnicaGUI extends JFrame {
 		}
 		return textArea;
 	}
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
+	}
+
 	private void ucitajIzFajla() {
 		try {
 			JFileChooser fc = new JFileChooser();
@@ -354,4 +363,17 @@ public class MenjacnicaGUI extends JFrame {
 				"Autor: Anisja Kijevcanin, Verzija 1.0", "O aplikaciji",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
+	
+	private void prikaziDodajKursGUI() {
+		DodajKursGUI prozorDodaj = new DodajKursGUI(this);
+		prozorDodaj.setLocationRelativeTo(contentPane);
+		prozorDodaj.setVisible(true);
+	}
+	
+	public void prikaziNovi(String novi) {
+		textArea.append(novi);
+	}
+	
+	
+	
 }
